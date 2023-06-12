@@ -16,8 +16,6 @@ export default function App() {
           <Stack.Screen name="Details" component={ActivityScreen} options={{ title: "Details" }} />
           <Stack.Screen name="AddActivity" component={AddActivityScreen} screenOptions={{presentation: 'modal'}} />
 
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -39,7 +39,7 @@ export default function HomeScreen({navigation}) {
   let val = getData();
   console.log(activities)
   return (<View style={styles.container}>
-    <View>{activities.activities.map((e, index) => (<Activity id={e.id} activities={activities} key={index} />))}</View>
+    <View>{activities.activities.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation}/>))}</View>
     <Button title="Add activity" onPress={()=>navigation.navigate('AddActivity')}/>
 
   </View>
