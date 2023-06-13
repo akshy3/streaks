@@ -1,8 +1,9 @@
 import { StyleSheet, Text } from "react-native";
 
-export default function ActivityScreen(){
+export default function ActivityScreen({route}){
+    const {id} = route.params;
     return(
-        <Text style={styles.container}>Homescrenn</Text>
+        <Text style={styles.container}>{id}</Text>
     )
 }
 

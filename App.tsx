@@ -5,10 +5,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import ActivityScreen from './screens/ActivityScreen';
 import AddActivityScreen from './screens/AddActivityScreen';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// let aa=async () => {
+//   await AsyncStorage.setItem('@activities',JSON.stringify([{id:}]))
+//   let a=await AsyncStorage.getItem('@activities')
+//   console.log(a)
+// }
 
 const Stack = createStackNavigator();
 export default function App() {
+//  aa();
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>

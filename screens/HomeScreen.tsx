@@ -1,48 +1,46 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Activity from "../components/Activity";
-import uuid from 'react-native-uuid';
 
-var anActivity = { "activities": [{ "id": uuid.v4(), "name": "random", "start": Date.now() }, { "id": uuid.v4(), "name": "hello", "start": Date.now() }] }
 
-const storeData = async (value: object) => {
-  try {
-    const jsonValue = JSON.stringify(value)
-    await AsyncStorage.setItem('@activities', jsonValue)
-  } catch (e) {
-    // saving error
+interface activity { id: string, title: string, date: number };
+
+
+export default function HomeScreen({ navigation }) {
+  const [activities, setActivities] = useState<activity[]>()
+
+
+  const getData = async () => {
+
+    const jsonValue: string | null = await AsyncStorage.getItem('@activities')
+    if (jsonValue != null) {
+      let res = await JSON.parse(jsonValue)
+      setActivities(res)
+    }
+
   }
-}
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // The screen is focused
+      // Call any action and update data
+      getData();
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [])
 
 
-const getData = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('@activities')
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    // error reading value
-  }
-}
 
-const dothat = async () => {
-  await storeData(anActivity)
-  let a = await getData();
-  console.log(a)
-}
-export default function HomeScreen({navigation}) {
+  return (
 
-  const [activities, setActivities] = useState(anActivity)
-  dothat();
+    <View style={styles.container}>
+      <View>{activities?.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />))}</View>
+      <Button title="Add activity" onPress={() => navigation.navigate('AddActivity')} />
 
-
-  let val = getData();
-  console.log(activities)
-  return (<View style={styles.container}>
-    <View>{activities.activities.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation}/>))}</View>
-    <Button title="Add activity" onPress={()=>navigation.navigate('AddActivity')}/>
-
-  </View>
+    </View>
   )
 }
 
