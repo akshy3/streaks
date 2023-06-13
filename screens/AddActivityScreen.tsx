@@ -47,13 +47,12 @@ export default function AddActivityScreen({ navigation }) {
         hideDatePicker();
     };
 
-    const [titleInput, setTitleInput] = useState('Title')
+    const [titleInput, setTitleInput] = useState('')
 
 
     return (<View style={styles.container}>
-        <Text style={styles.text}>Form</Text>
-        <TextInput style={styles.textInput} value={titleInput} onChangeText={text => setTitleInput(text)} />
-        <Button title="Show Date Picker" onPress={showDatePicker} />
+        <TextInput style={styles.textInput} placeholder="Enter activity name" value={titleInput} onChangeText={text => setTitleInput(text)} />
+        <Button title="Select date" onPress={showDatePicker} style={styles.selectDateButton}/>
         <DateTimePickerModal
             isVisible={isDatePickerVisible}
             mode="date"
@@ -75,8 +74,15 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     textInput: {
-        color: 'white',
-        backgroundColor: 'red'
+        color: 'black',
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderWidth: 2,
+        padding: 5,
+        paddingLeft: 10,
+
+    },
+    selectDateButton: {
 
     }
 })
