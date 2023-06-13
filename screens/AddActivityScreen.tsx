@@ -6,7 +6,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import uuid from 'react-native-uuid';
 
 
-export default function AddActivityScreen({ navigation }) {
+export default function AddActivityScreen(props: { navigation: any; }) {
+    const {navigation} = props
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [dateInput, setDateInput] = useState(Date.now())
 
@@ -38,13 +39,15 @@ export default function AddActivityScreen({ navigation }) {
         setDatePickerVisibility(true);
     };
 
-    const hideDatePicker = () => {
+    const hideDatePicker = (date: Date) => {
         setDatePickerVisibility(false);
+
     };
 
-    const handleConfirm = (date: string) => {
-        setDateInput(Date.parse(date))
-        hideDatePicker();
+    const handleConfirm = (date: Date) => {
+        setDateInput(Date.parse(date.toString()))
+        hideDatePicker(date);
+
     };
 
     const [titleInput, setTitleInput] = useState('')
@@ -52,7 +55,7 @@ export default function AddActivityScreen({ navigation }) {
 
     return (<View style={styles.container}>
         <TextInput style={styles.textInput} placeholder="Enter activity name" value={titleInput} onChangeText={text => setTitleInput(text)} />
-        <Button title="Select date" onPress={showDatePicker} style={styles.selectDateButton}/>
+        <Button title="Select date" onPress={showDatePicker} />
         <DateTimePickerModal
             isVisible={isDatePickerVisible}
             mode="date"

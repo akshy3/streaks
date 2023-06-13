@@ -1,18 +1,19 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button, StyleSheet, Text, View } from "react-native";
 
-export default function ActivityScreen({ route, navigation }) {
+export default function ActivityScreen(props: { route: any; navigation: any; }) {
+    const { route, navigation, } = props
     const { id, activities } = route.params;
-    var activity = activities.find(item => item.id == id);
+    var activity = activities.find((item: { id: any; }) => item.id == id);
     let date = new Date(activity.date)
     const handeDelete = async () => {
-        let data = activities.filter(item => item.id !== id)
+        let data = activities.filter((item: { id: any; }) => item.id !== id)
         data = JSON.stringify(data)
         await AsyncStorage.setItem('@activities', data)
         navigation.navigate('Home')
     }
     const handleRelapse = async () => {
-        let data = activities.filter(item => item.id !== id)
+        let data = activities.filter((item: { id: any; }) => item.id !== id)
         data = [...data, { id: id, title: activity.title, date: Date.now() }]
 
         data = JSON.stringify(data)

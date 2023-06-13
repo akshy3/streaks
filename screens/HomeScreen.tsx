@@ -7,7 +7,8 @@ import Activity from "../components/Activity";
 interface activity { id: string, title: string, date: number };
 
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen(props: { navigation: any; }) {
+  const {navigation} = props;
   const [activities, setActivities] = useState<activity[]>()
 
 
