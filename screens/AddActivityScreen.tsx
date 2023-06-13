@@ -31,7 +31,7 @@ export default function AddActivityScreen({ navigation }) {
         }
     }
     const handleSubmit = async () => {
-        await storeData({ "id": uuid.v4(), "title": titleInput, "date": dateInput })
+        await storeData({ id: uuid.v4(), title: titleInput, date: dateInput })
         navigation.navigate('Home')
     }
     const showDatePicker = () => {
