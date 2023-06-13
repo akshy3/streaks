@@ -8,20 +8,10 @@ import uuid from 'react-native-uuid';
 
 export default function AddActivityScreen({ navigation }) {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [dateInput, setDateInput] = useState(Date.parse(Date.now()))
-    const [data, setData] = useState([])
+    const [dateInput, setDateInput] = useState(Date.now())
 
-    // const getData = async () => {
-    //     try {
-    //       const jsonValue = await AsyncStorage.getItem('@activities')
-    //       let res= jsonValue != null ? JSON.parse(jsonValue) : null;
-    //       storeData(res)
-    //       console.log(res,data)
-    //     } catch (e) {
-    //       // error reading value
-    //     }
-    //   }
-    const storeData = async (value) => {
+
+    const storeData = async (value: { id: string | number[]; title: string; date: number; }) => {
         try {
             const jsonValue = await AsyncStorage.getItem('@activities')
             if (jsonValue == null) {
@@ -52,7 +42,7 @@ export default function AddActivityScreen({ navigation }) {
         setDatePickerVisibility(false);
     };
 
-    const handleConfirm = (date) => {
+    const handleConfirm = (date: string) => {
         setDateInput(Date.parse(date))
         hideDatePicker();
     };
