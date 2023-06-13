@@ -6,7 +6,6 @@ import { View, Text, StyleSheet, Dimensions, Pressable } from 'react-native'
 export default function Activity(props: { navigation: { navigate: any; }; activities: any[]; id: any; }) {
     const { navigate } = props.navigation;
     var activity = props.activities.find(item=>item.id==props.id);
-    console.log("activity",activity)
 
     var diff = Math.floor((Date.now() - activity.date) / 86400000);
 
