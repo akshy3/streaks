@@ -11,7 +11,7 @@ export default function Activity(props: { navigation: { navigate: any; }; activi
     var diff = Math.floor((Date.now() - activity.date) / 86400000);
 
     return (
-        <Pressable style={styles.container} onPress={()=> navigate('Details',{id: props.id})}>
+        <Pressable style={styles.container} onPress={()=> navigate('Details',{id: props.id, activities:props.activities})}>
 
             <Text style={styles.title}>{activity.title}</Text>
             <Text style={styles.title}>{diff} {diff == 0? 'day':'days'}</Text>
