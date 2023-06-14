@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Activity from "../components/Activity";
 
 
-interface activity { id: string, title: string, date: number };
+interface activity { id: string, title: string, date: number, history: [] };
 
 
 export default function HomeScreen(props: { navigation: any; }) {
@@ -16,7 +16,7 @@ export default function HomeScreen(props: { navigation: any; }) {
 
     const jsonValue = await AsyncStorage.getItem('@activities')
     if (jsonValue!="") {
-      let res:activity[] = await JSON.parse(jsonValue)
+      let res:activity[] = await JSON.parse(jsonValue || '{}') 
       setActivities(res)
     }
 
