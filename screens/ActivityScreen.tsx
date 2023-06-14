@@ -14,7 +14,8 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     }
     const handleRelapse = async () => {
         let data = activities.filter((item: { id: any; }) => item.id !== id)
-        data = [...data, { id: id, title: activity.title, date: Date.now() }]
+        let newHistory = [...activity.history,Date.now()]
+        data = [...data, { id: id, title: activity.title, date: Date.now(), history: newHistory}]
 
         data = JSON.stringify(data)
         await AsyncStorage.setItem('@activities', data)
@@ -24,6 +25,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
         <View style={styles.container}>
             <Text style={styles.text}>{activity.title}</Text>
             <Text style={styles.text}>{date.toDateString()}</Text>
+            <Text style={styles.text}>{activity.history}</Text>
             <Button onPress={handleRelapse} title="Relapse" />
             <Button onPress={handeDelete} title="Delete this activity" />
         </View>
