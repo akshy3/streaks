@@ -28,7 +28,6 @@
     },
     "sdkVersion": "48.0.0"
   },
-  "name": "streaks",
-  "jsEngine": "hermes"
+  "name": "streaks"
 
 }
