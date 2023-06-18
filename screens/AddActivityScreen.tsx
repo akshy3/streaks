@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         color: 'white',
         padding: 10,
+        flex: 1,
     }
     ,
     text: {

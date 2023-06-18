@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import Activity from "../components/Activity";
@@ -38,8 +38,12 @@ export default function HomeScreen(props: { navigation: any; }) {
   return (
 
     <View style={styles.container}>
-      <View>{activities?.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />))}</View>
-      <Button title="Add activity" onPress={() => navigation.navigate('AddActivity')} />
+      <ScrollView>
+
+        <View>{activities.length > 0 ? activities.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />)) : <><Text style={styles.emptyInfo}>Nothing here.</Text></>}</View>
+      </ScrollView>
+
+      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddActivity')}><Text style={styles.buttonText}>+</Text></TouchableOpacity>
 
     </View>
   )
@@ -51,5 +55,27 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     padding: 10,
+    position: 'relative',
+  },
+  emptyInfo: {
+    color: 'white',
+  },
+  addButton: {
+    backgroundColor: 'red',
+    position: 'absolute',
+    bottom: 30,
+    right: 20,
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+
+  },
+  buttonText: {
+    fontSize: 50,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: 'bold',
   }
 })
