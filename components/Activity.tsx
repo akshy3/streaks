@@ -20,10 +20,10 @@ export default function Activity(props: { navigation: { navigate: any; }; activi
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'black',
+        backgroundColor: '#370617',
         borderWidth: 4,
-        borderColor: 'white',
-        borderRadius: 10,
+        borderColor: '#FEFAE0',
+        // borderRadius: 10,
         flexDirection: 'row',
         padding: 7,
         margin: 5,

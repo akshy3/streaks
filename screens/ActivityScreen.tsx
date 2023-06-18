@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Timeline from 'react-native-timeline-flatlist'
 
 
@@ -60,7 +60,6 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{activity.title}</Text>
-            <Text style={styles.text}>{date.toDateString()}</Text>
             <Timeline data={timelinedata}
                 style={styles.historyContainer}
                 titleStyle={{ color: 'white' }}
@@ -68,8 +67,8 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
                 lineColor='white'
                 descriptionStyle={{ color: 'gray' }}
             />
-            <Button onPress={handleRelapse} title="Relapse" />
-            <Button onPress={handeDelete} title="Delete this activity" />
+            <TouchableOpacity style={styles.relapseButton} onPress={handleRelapse}><Text style={styles.relapseButtonText}>Relapse</Text></TouchableOpacity> 
+            <TouchableOpacity style={styles.deleteButton} onPress={handeDelete}><Text style={styles.deleteButtonText}>Delete this activity</Text></TouchableOpacity> 
         </View>
     )
 }
@@ -81,10 +80,34 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     text: {
-        color: 'white'
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
     },
     historyContainer: {
         margin: 20,
         backgroundColor: 'black',
+    },
+    relapseButton: {
+        backgroundColor: '#370617',
+        width: '40%',
+        marginTop: 10,
+        marginBottom: 10,
+        padding: 5,
+
+    },
+    relapseButtonText: {
+        color: 'white',
+        padding: 10,
+        fontWeight: 'bold',
+    },
+    deleteButton: {
+        backgroundColor: '#6A040F',
+        padding: 10,
+
+    },
+    deleteButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
     }
 })

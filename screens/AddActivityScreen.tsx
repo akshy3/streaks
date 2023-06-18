@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext, useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import uuid from 'react-native-uuid';
 
@@ -33,7 +33,7 @@ export default function AddActivityScreen(props: { navigation: any; }) {
     }
     const handleSubmit = async () => {
         if (titleInput !== "") {
-            if(dateInput<=Date.now()){
+            if (dateInput <= Date.now()) {
 
                 await storeData({ id: uuid.v4(), title: titleInput, date: dateInput, history: [dateInput] })
                 navigation.navigate('Home')
@@ -59,14 +59,15 @@ export default function AddActivityScreen(props: { navigation: any; }) {
 
     return (<View style={styles.container}>
         <TextInput style={styles.textInput} placeholder="Enter activity name" value={titleInput} onChangeText={text => setTitleInput(text)} />
-        <Button title="Select date" onPress={showDatePicker} />
+        <TouchableOpacity style={styles.selectDateButton} onPress={showDatePicker}><Text style={styles.selectDateButtonText}>Select date</Text></TouchableOpacity>
         <DateTimePickerModal
             isVisible={isDatePickerVisible}
             mode="date"
             onConfirm={handleConfirm}
             onCancel={hideDatePicker}
         />
-        <Button title="Add activity" onPress={handleSubmit} />
+        <TouchableOpacity style={styles.addActivityButton} onPress={handleSubmit}><Text style={styles.addActivityButtonText}>Add activity</Text></TouchableOpacity>
+
     </View>
     )
 }
@@ -92,6 +93,25 @@ const styles = StyleSheet.create({
 
     },
     selectDateButton: {
-
-    }
+        backgroundColor: 'purple',
+        padding: 10,
+        width: '40%',
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    selectDateButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    addActivityButton: {
+        backgroundColor: 'purple',
+        padding: 10,
+        width: '80%',
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    addActivityButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
 })

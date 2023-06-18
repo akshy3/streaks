@@ -51,7 +51,7 @@ export default function HomeScreen(props: { navigation: any; }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: '#03071E',
     flex: 1,
     flexDirection: 'column',
     padding: 10,
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   addButton: {
-    backgroundColor: 'white',
+    backgroundColor: '#370617',
+    borderRadius: 40,
     position: 'absolute',
     bottom: 30,
     right: 20,
@@ -77,6 +78,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   }
 })
