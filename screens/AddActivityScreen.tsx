@@ -8,7 +8,8 @@ import uuid from 'react-native-uuid';
 export default function AddActivityScreen(props: { navigation: any; }) {
     const { navigation } = props
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [dateInput, setDateInput] = useState(Number(new Date().setHours(0,0,0,0)))
+    const [dateInput, setDateInput] = useState(Number(new Date().setHours(0, 0, 0, 0)))
+    const [titleInput, setTitleInput] = useState('')
 
 
     const storeData = async (value: { id: string | number[]; title: string; date: number; history: Number[] }) => {
@@ -31,8 +32,13 @@ export default function AddActivityScreen(props: { navigation: any; }) {
         }
     }
     const handleSubmit = async () => {
-        await storeData({ id: uuid.v4(), title: titleInput, date: dateInput, history: [dateInput] })
-        navigation.navigate('Home')
+        if (titleInput !== "") {
+            if(dateInput<=Date.now()){
+
+                await storeData({ id: uuid.v4(), title: titleInput, date: dateInput, history: [dateInput] })
+                navigation.navigate('Home')
+            }
+        }
     }
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -49,7 +55,6 @@ export default function AddActivityScreen(props: { navigation: any; }) {
 
     };
 
-    const [titleInput, setTitleInput] = useState('')
 
 
     return (<View style={styles.container}>

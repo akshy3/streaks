@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   addButton: {
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     position: 'absolute',
     bottom: 30,
     right: 20,
@@ -77,5 +77,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     fontWeight: 'bold',
+    color: 'black',
   }
 })
