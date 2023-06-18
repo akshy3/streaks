@@ -8,7 +8,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     const { id, activities } = route.params;
     var activity = activities.find((item: { id: any; }) => item.id == id);
     let date = new Date(activity.date)
-    const timelinedata: { time: string; title: string; description: string; circleSize?: number  }[] = []
+    const timelinedata: { time: string; title: string; description: string; circleSize?: number }[] = []
 
 
     const DateDiff = (date1: number, date2: number): number => {
@@ -45,13 +45,17 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
         navigation.navigate('Home')
     }
     const handleRelapse = async () => {
-        let data = activities.filter((item: { id: any; }) => item.id !== id)
-        let newHistory = [...activity.history, Number(new Date().setHours(0, 0, 0, 0))]
-        data = [...data, { id: id, title: activity.title, date: (Number(new Date(Date.now()).setHours(0, 0, 0, 0))), history: newHistory }]
+        if (activity.history[activity.history.length -1]!== Number(new Date().setHours(0,0,0,0))) {
 
-        data = JSON.stringify(data)
-        await AsyncStorage.setItem('@activities', data)
-        navigation.navigate('Home')
+            let data = activities.filter((item: { id: any; }) => item.id !== id)
+            let newHistory = [...activity.history, Number(new Date().setHours(0, 0, 0, 0))]
+            data = [...data, { id: id, title: activity.title, date: (Number(new Date(Date.now()).setHours(0, 0, 0, 0))), history: newHistory }]
+
+            data = JSON.stringify(data)
+            await AsyncStorage.setItem('@activities', data)
+            navigation.navigate('Home')
+        }
+
     }
     return (
         <View style={styles.container}>
