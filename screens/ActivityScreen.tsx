@@ -8,7 +8,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     const { id, activities } = route.params;
     var activity = activities.find((item: { id: any; }) => item.id == id);
     let date = new Date(activity.date)
-    const timelinedata: { time: string; title: string; description: string; }[] = []
+    const timelinedata: { time: string; title: string; description: string; }[] = [{time: '', title: 'You created this activity!', description: `On ${(new Date(activity.date).toDateString())}`}]
 
 
     const DateDiff = (date1: number, date2: number): number => {
@@ -19,17 +19,17 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
         for (let i = 0; i < arr.length; i++) {
             if (i == 0) {
                 let diff = DateDiff(Date.now(), arr[i]);
-                timelinedata.push({time: ``, title: `${diff} Days`, description:(new Date(arr[i]).toDateString())})
+                timelinedata.unshift({ time: ``, title: `${diff} Days`, description: `On ${new Date(arr[i]).toDateString()}` })
 
             }
             else {
 
                 let diff = DateDiff(arr[i - 1], arr[i]);
-                timelinedata.push({time: '', title: `${diff} Days`, description:(new Date(arr[i]).toDateString())})
+                timelinedata.unshift({ time: '', title: `${diff} Days`, description: `On ${new Date(arr[i]).toDateString()}` })
 
             }
         }
-        
+
     }
     handleHistory(activity.history)
 
@@ -41,7 +41,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     }
     const handleRelapse = async () => {
         let data = activities.filter((item: { id: any; }) => item.id !== id)
-        let newHistory = [...activity.history, Number(new Date().setHours(0,0,0,0))]
+        let newHistory = [...activity.history, Number(new Date().setHours(0, 0, 0, 0))]
         data = [...data, { id: id, title: activity.title, date: Date.now(), history: newHistory }]
 
         data = JSON.stringify(data)
@@ -52,10 +52,15 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
         <View style={styles.container}>
             <Text style={styles.text}>{activity.title}</Text>
             <Text style={styles.text}>{date.toDateString()}</Text>
-            {/* <Text style={styles.text}>{activity.history ? handleHistory(activity.history) : <></>}</Text> */}
-            <Timeline data={timelinedata} options={{
-                style: { backgroundColor: 'white' }
-            }} />
+            <Timeline data={timelinedata}
+                options={{
+                    style: styles.historyContainer
+                }}
+                titleStyle={{ color: 'white' }}
+                circleColor='white'
+                lineColor='white'
+                descriptionStyle={{ color: 'gray' }}
+            />
             <Button onPress={handleRelapse} title="Relapse" />
             <Button onPress={handeDelete} title="Delete this activity" />
         </View>
@@ -64,13 +69,15 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         flex: 1,
         padding: 10,
     },
     text: {
+        color: 'white'
     },
     historyContainer: {
-        backgroundColor: 'yellow',
+        margin: 20,
+        backgroundColor: 'black',
     }
 })
