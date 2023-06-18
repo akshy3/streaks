@@ -25,13 +25,13 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
             else {
 
                 let diff = DateDiff(arr[i], arr[i - 1]);
-                timelinedata.unshift({ time: '', title: `${diff} Days`, description: `On ${new Date(arr[i]).toDateString()}` })
+                timelinedata.unshift({ time: '', title: `${diff} Days`, description: `Relapsed on ${new Date(arr[i]).toDateString()}.` })
 
             }
 
         }
         let diff = DateDiff(Number(new Date().setHours(0, 0, 0, 0)), activity.history[activity.history.length - 1]);
-        timelinedata.unshift({ time: '', title: `${diff} Days`, description: `On ${new Date().toDateString()}`, circleSize: 5 })
+        timelinedata.unshift({ time: '', title: `${diff} Days`, description: `And still going! `, circleSize: 5 })
 
 
 
