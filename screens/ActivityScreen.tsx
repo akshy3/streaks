@@ -8,7 +8,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     const { id, activities } = route.params;
     var activity = activities.find((item: { id: any; }) => item.id == id);
     let date = new Date(activity.date)
-    const timelinedata: { time: string; title: string; description: string; }[] = []
+    const timelinedata: { time: string; title: string; description: string; circleSize?: number  }[] = []
 
 
     const DateDiff = (date1: number, date2: number): number => {
@@ -21,21 +21,17 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
                 timelinedata.unshift({ time: '', title: 'You created this activity!', description: `On ${(new Date(activity.history[0]).toDateString())}` })
 
             }
-            // else if(i=== arr.length-1){
-            //     let diff = DateDiff(arr[i - 1], arr[i]);
-            //     timelinedata.unshift({ time: '', title: `${diff} Days`, description: `On ${new Date(arr[i]).toDateString()}`})
 
-            //              }
             else {
 
-                let diff = DateDiff( arr[i],arr[i - 1]);
+                let diff = DateDiff(arr[i], arr[i - 1]);
                 timelinedata.unshift({ time: '', title: `${diff} Days`, description: `On ${new Date(arr[i]).toDateString()}` })
 
             }
-   
+
         }
-        let diff = DateDiff(Number(new Date().setHours(0,0,0,0)), activity.history[activity.history.length -1]);
-        timelinedata.unshift({ time: '', title: `${diff} Days`, description: `On ${new Date().toDateString()}`, circleSize: 5  })
+        let diff = DateDiff(Number(new Date().setHours(0, 0, 0, 0)), activity.history[activity.history.length - 1]);
+        timelinedata.unshift({ time: '', title: `${diff} Days`, description: `On ${new Date().toDateString()}`, circleSize: 5 })
 
 
 
@@ -51,7 +47,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     const handleRelapse = async () => {
         let data = activities.filter((item: { id: any; }) => item.id !== id)
         let newHistory = [...activity.history, Number(new Date().setHours(0, 0, 0, 0))]
-        data = [...data, { id: id, title: activity.title, date: (Number(new Date(Date.now()).setHours(0,0,0,0))), history: newHistory }]
+        data = [...data, { id: id, title: activity.title, date: (Number(new Date(Date.now()).setHours(0, 0, 0, 0))), history: newHistory }]
 
         data = JSON.stringify(data)
         await AsyncStorage.setItem('@activities', data)
@@ -62,9 +58,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
             <Text style={styles.text}>{activity.title}</Text>
             <Text style={styles.text}>{date.toDateString()}</Text>
             <Timeline data={timelinedata}
-                options={{
-                    style: styles.historyContainer
-                }}
+                style={styles.historyContainer}
                 titleStyle={{ color: 'white' }}
                 circleColor='white'
                 lineColor='white'
