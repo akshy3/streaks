@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     flex: 1,
     flexDirection: 'column',
+    padding: 10,
   }
 })

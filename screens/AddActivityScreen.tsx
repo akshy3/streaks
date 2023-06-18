@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'black',
         color: 'white',
+        padding: 10,
     }
     ,
     text: {
