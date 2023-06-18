@@ -41,7 +41,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     }
     const handleRelapse = async () => {
         let data = activities.filter((item: { id: any; }) => item.id !== id)
-        let newHistory = [...activity.history, Date.now()]
+        let newHistory = [...activity.history, Number(new Date().setHours(0,0,0,0))]
         data = [...data, { id: id, title: activity.title, date: Date.now(), history: newHistory }]
 
         data = JSON.stringify(data)
