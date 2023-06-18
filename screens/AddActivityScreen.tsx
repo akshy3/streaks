@@ -11,7 +11,7 @@ export default function AddActivityScreen(props: { navigation: any; }) {
     const [dateInput, setDateInput] = useState(Number(new Date().setHours(0,0,0,0)))
 
 
-    const storeData = async (value: { id: string | number[]; title: string; date: number; history: [] }) => {
+    const storeData = async (value: { id: string | number[]; title: string; date: number; history: Number[] }) => {
         try {
             const jsonValue = await AsyncStorage.getItem('@activities')
             if (jsonValue == null) {
@@ -31,7 +31,7 @@ export default function AddActivityScreen(props: { navigation: any; }) {
         }
     }
     const handleSubmit = async () => {
-        await storeData({ id: uuid.v4(), title: titleInput, date: dateInput, history: [] })
+        await storeData({ id: uuid.v4(), title: titleInput, date: dateInput, history: [dateInput] })
         navigation.navigate('Home')
     }
     const showDatePicker = () => {

@@ -15,6 +15,7 @@ export default function HomeScreen(props: { navigation: any; }) {
   const getData = async () => {
 
     const jsonValue = await AsyncStorage.getItem('@activities')
+    console.log(jsonValue)
     let res: activity[] = await JSON.parse(jsonValue || '[]')
     setActivities(res)
 
