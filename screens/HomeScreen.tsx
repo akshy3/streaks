@@ -8,17 +8,16 @@ interface activity { id: string, title: string, date: number, history: [] };
 
 
 export default function HomeScreen(props: { navigation: any; }) {
-  const {navigation} = props;
+  const { navigation } = props;
   const [activities, setActivities] = useState<activity[]>(new Array())
 
 
   const getData = async () => {
 
     const jsonValue = await AsyncStorage.getItem('@activities')
-    if (jsonValue!="") {
-      let res:activity[] = await JSON.parse(jsonValue || '{}') 
-      setActivities(res)
-    }
+    let res: activity[] = await JSON.parse(jsonValue || '[]')
+    setActivities(res)
+
 
   }
 
@@ -38,7 +37,7 @@ export default function HomeScreen(props: { navigation: any; }) {
   return (
 
     <View style={styles.container}>
-      <View>{ activities?.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />))}</View>
+      <View>{activities?.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />))}</View>
       <Button title="Add activity" onPress={() => navigation.navigate('AddActivity')} />
 
     </View>
