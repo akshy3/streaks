@@ -2,6 +2,7 @@ import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "re
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import Activity from "../components/Activity";
+import PlusSvg from "../components/PlusSvg";
 
 
 interface activity { id: string, title: string, date: number, history: [] };
@@ -43,7 +44,7 @@ export default function HomeScreen(props: { navigation: any; }) {
         <View>{activities.length > 0 ? activities.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />)) : <><Text style={styles.emptyInfo}>Nothing here.</Text></>}</View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddActivity')}><Text style={styles.buttonText}>+</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddActivity')}><PlusSvg /></TouchableOpacity>
 
     </View>
   )
@@ -61,8 +62,9 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   addButton: {
-    backgroundColor: '#370617',
-    borderRadius: 40,
+    // backgroundColor: '#370617',
+    // borderWidth: 4,
+    borderColor: 'white',
     position: 'absolute',
     bottom: 30,
     right: 20,
@@ -72,12 +74,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
 
-  },
-  buttonText: {
-    fontSize: 50,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontWeight: 'bold',
-    color: 'white',
+
   }
 })

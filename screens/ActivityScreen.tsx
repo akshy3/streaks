@@ -59,7 +59,6 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{activity.title}</Text>
             <Timeline data={timelinedata}
                 style={styles.historyContainer}
                 titleStyle={{ color: 'white' }}
@@ -75,7 +74,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'black',
+        backgroundColor: '#03071E',
         flex: 1,
         padding: 10,
     },
@@ -86,14 +85,16 @@ const styles = StyleSheet.create({
     },
     historyContainer: {
         margin: 20,
-        backgroundColor: 'black',
+        // backgroundColor: 'black',
     },
     relapseButton: {
-        backgroundColor: '#370617',
+        // backgroundColor: '#370617',
         width: '40%',
         marginTop: 10,
         marginBottom: 10,
         padding: 5,
+        borderWidth: 1,
+        borderColor: 'white',
 
     },
     relapseButtonText: {
@@ -102,8 +103,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     deleteButton: {
-        backgroundColor: '#6A040F',
+        // backgroundColor: '#6A040F',
         padding: 10,
+        borderWidth: 0.5,
+        borderColor: 'white',
+        
 
     },
     deleteButtonText: {
