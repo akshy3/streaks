@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#03071E',
     flex: 1,
     flexDirection: 'column',
-    padding: 10,
+    padding: 13,
     position: 'relative',
   },
   emptyInfo: {

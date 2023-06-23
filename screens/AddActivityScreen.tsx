@@ -106,10 +106,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     addActivityButton: {
-        // backgroundColor: '#003300',
+        backgroundColor: '#03071F',
         borderWidth: 1,
         borderColor: 'white',
-        padding: 15,
+        padding: 10,
         width: '80%',
         marginTop: 10,
         marginBottom: 10,

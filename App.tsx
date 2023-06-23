@@ -32,7 +32,7 @@ export default function App() {
       >
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Streaks" }} />
         <Stack.Screen name="Details" component={ActivityScreen} options={({ route }) => ({ title: route.params.title })} />
-        <Stack.Screen name="AddActivity" component={AddActivityScreen}  />
+        <Stack.Screen name="AddActivity" component={AddActivityScreen} options={{ title: "Add new activity" }} />
       </Stack.Navigator>
       <StatusBar style='light' />
 

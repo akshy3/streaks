@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     relapseButtonText: {
         color: 'white',
-        padding: 10,
+        padding: 5,
         fontWeight: 'bold',
     },
     deleteButton: {
