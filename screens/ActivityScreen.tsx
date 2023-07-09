@@ -64,7 +64,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
                 titleStyle={{ color: 'white' }}
                 circleColor='white'
                 lineColor='white'
-                descriptionStyle={{ color: 'gray' }}
+                descriptionStyle={{ color: 'gray',fontFamily: 'monospace' }}
             />
             <TouchableOpacity style={styles.relapseButton} onPress={handleRelapse}><Text style={styles.relapseButtonText}>Relapse</Text></TouchableOpacity> 
             <TouchableOpacity style={styles.deleteButton} onPress={handeDelete}><Text style={styles.deleteButtonText}>Delete this activity</Text></TouchableOpacity> 
