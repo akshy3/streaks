@@ -18,7 +18,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     const handleHistory = (arr: number[]) => {
         for (let i = 0; i < arr.length; i++) {
             if (i == 0) {
-                timelinedata.unshift({ time: '', title: 'You created this activity!', description: `On ${(new Date(activity.history[0]).toDateString())}` })
+                timelinedata.unshift({ time: '', title: 'You created this activity', description: `On ${(new Date(activity.history[0]).toDateString())}.` })
 
             }
 
@@ -74,7 +74,7 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#03071E',
+        backgroundColor: 'black',
         flex: 1,
         padding: 10,
     },

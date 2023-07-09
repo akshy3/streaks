@@ -17,24 +17,26 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   //  aa();
   return (
-      <View style={{backgroundColor: '#03071E', flex: 1,}}>
+      <View style={{backgroundColor: 'black', flex: 1,}}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#03071E',
+            backgroundColor: 'orange',
           },
-          headerTintColor: '#fff',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontWeight: 'bold',
+            fontSize:19,
+            fontFamily: 'monospace',
           },
         }}
       >
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Streaks" }} />
         <Stack.Screen name="Details" component={ActivityScreen} options={({ route }) => ({ title: route.params.title })} />
-        <Stack.Screen name="AddActivity" component={AddActivityScreen} options={{ title: "Add new activity" }} />
+        <Stack.Screen name="Add Activity" component={AddActivityScreen}  />
       </Stack.Navigator>
-      <StatusBar style='light' />
+      {/* <StatusBar style='light' /> */}
 
     </NavigationContainer>
       </View>

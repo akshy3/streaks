@@ -74,7 +74,7 @@ export default function AddActivityScreen(props: { navigation: any; }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#03071E',
+        backgroundColor: 'black',
         color: 'white',
         padding: 10,
         flex: 1,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
     },
     selectDateButton: {
-        backgroundColor: '#03071E',
+        // backgroundColor: '#03071E',
         borderWidth: 0.5,
         borderColor: 'white',
         padding: 10,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
         fontFamily: 'monospace'
     },
     addActivityButton: {
-        backgroundColor: '#03071F',
+        // backgroundColor: '#03071F',
         borderWidth: 1,
         borderColor: 'white',
         padding: 10,

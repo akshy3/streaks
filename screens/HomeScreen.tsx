@@ -43,7 +43,7 @@ export default function HomeScreen(props: { navigation: any; }) {
         <View>{activities.length > 0 ? activities.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />)) : <><Text style={styles.emptyInfo}>Add activities to view them here.</Text></>}</View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddActivity')}><PlusSvg /></TouchableOpacity>
+      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add Activity')}><PlusSvg /></TouchableOpacity>
 
     </View>
   )
@@ -51,7 +51,7 @@ export default function HomeScreen(props: { navigation: any; }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#03071E',
+    backgroundColor: 'black',
     flex: 1,
     flexDirection: 'column',
     padding: 13,
@@ -62,9 +62,10 @@ const styles = StyleSheet.create({
     margin: 40,
   },
   addButton: {
-    // backgroundColor: '#370617',
+    backgroundColor: 'orange',
     // borderWidth: 4,
-    borderColor: 'white',
+    // borderColor: 'white',
+    borderRadius: 40,
     position: 'absolute',
     bottom: 30,
     right: 20,
