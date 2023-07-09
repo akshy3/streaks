@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     title: {
         color: 'white',
         fontWeight: 'bold',
+        fontFamily: 'monospace'
 
 
     }

@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   //  aa();
   return (
-      <View style={{backgroundColor: '#03071E', flex: 1}}>
+      <View style={{backgroundColor: '#03071E', flex: 1,}}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'
         screenOptions={{

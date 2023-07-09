@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         padding: 5,
         paddingLeft: 10,
+        fontFamily: 'monospace'
 
     },
     selectDateButton: {
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     selectDateButtonText: {
         color: 'white',
         fontWeight: 'bold',
+        fontFamily: 'monospace'
     },
     addActivityButton: {
         backgroundColor: '#03071F',
@@ -117,5 +119,6 @@ const styles = StyleSheet.create({
     addActivityButtonText: {
         color: 'white',
         fontWeight: 'bold',
+        fontFamily: 'monospace',
     },
 })

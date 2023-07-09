@@ -82,10 +82,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         fontSize: 20,
+        fontFamily: 'monospace'
     },
     historyContainer: {
         margin: 20,
         // backgroundColor: 'black',
+        
     },
     relapseButton: {
         // backgroundColor: '#370617',
@@ -101,6 +103,7 @@ const styles = StyleSheet.create({
         color: 'white',
         padding: 5,
         fontWeight: 'bold',
+        fontFamily: 'monospace'
     },
     deleteButton: {
         // backgroundColor: '#6A040F',
@@ -113,5 +116,6 @@ const styles = StyleSheet.create({
     deleteButtonText: {
         color: 'white',
         fontWeight: 'bold',
+        fontFamily: 'monospace'
     }
 })
