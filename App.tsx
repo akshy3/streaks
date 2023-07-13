@@ -36,7 +36,7 @@ export default function App() {
         <Stack.Screen name="Details" component={ActivityScreen} options={({ route }) => ({ title: route.params.title })} />
         <Stack.Screen name="Add Activity" component={AddActivityScreen}  />
       </Stack.Navigator>
-      {/* <StatusBar style='light' /> */}
+      <StatusBar style='light' />
 
     </NavigationContainer>
       </View>
