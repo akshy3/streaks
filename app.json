@@ -21,13 +21,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.akshayashok.streaks"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "sdkVersion": "48.0.0"
+    "sdkVersion": "48.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "a46489b7-6fc7-47e0-9f0a-5592a4ed370b"
+      }
+    }
   },
   "name": "streaks"
-
 }
