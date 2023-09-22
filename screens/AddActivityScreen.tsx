@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext, useState } from "react";
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Button, Chip, Snackbar, TextInput } from "react-native-paper";
 import uuid from 'react-native-uuid';
 
 
@@ -10,6 +11,7 @@ export default function AddActivityScreen(props: { navigation: any; }) {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [dateInput, setDateInput] = useState(Number(new Date().setHours(0, 0, 0, 0)))
     const [titleInput, setTitleInput] = useState('')
+    const [incompleteCredentialsSnackVisible, setIncompleteCredentialsSnackVisible] = useState(false)
 
 
     const storeData = async (value: { id: string | number[]; title: string; date: number; history: Number[] }) => {
@@ -39,6 +41,9 @@ export default function AddActivityScreen(props: { navigation: any; }) {
                 navigation.navigate('Home')
             }
         }
+        else {
+            setIncompleteCredentialsSnackVisible(true)
+        }
     }
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -58,67 +63,48 @@ export default function AddActivityScreen(props: { navigation: any; }) {
 
 
     return (<View style={styles.container}>
-        <TextInput style={styles.textInput} placeholder="Enter activity name" value={titleInput} onChangeText={text => setTitleInput(text)} />
-        <TouchableOpacity style={styles.selectDateButton} onPress={showDatePicker}><Text style={styles.selectDateButtonText}>Select date</Text></TouchableOpacity>
+        <TextInput
+            mode="outlined"
+            label="Activity name"
+            value={titleInput}
+            onChangeText={text => setTitleInput(text)}
+        />
+        <Chip
+            onPress={showDatePicker}
+            style={styles.selectDateButton}
+            icon="calendar">{new Date(dateInput).toDateString()} </Chip>
+
         <DateTimePickerModal
             isVisible={isDatePickerVisible}
             mode="date"
             onConfirm={handleConfirm}
             onCancel={hideDatePicker}
         />
-        <TouchableOpacity style={styles.addActivityButton} onPress={handleSubmit}><Text style={styles.addActivityButtonText}>Add activity</Text></TouchableOpacity>
-
+        <Button style={styles.addActivityButton} icon="check-outline" mode="contained" onPress={handleSubmit}>Add</Button>
+        <Snackbar
+            visible={incompleteCredentialsSnackVisible}
+            onIconPress={() => { setIncompleteCredentialsSnackVisible(!incompleteCredentialsSnackVisible) }}
+            onDismiss={() => { setIncompleteCredentialsSnackVisible(false) }}
+        >
+            Please fill all the details.
+        </Snackbar>
     </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'black',
-        color: 'white',
         padding: 10,
         flex: 1,
-    }
-    ,
-    text: {
-        color: 'white',
-    },
-    textInput: {
-        color: 'black',
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 2,
-        padding: 5,
-        paddingLeft: 10,
-        fontFamily: 'monospace'
-
     },
     selectDateButton: {
-        // backgroundColor: '#03071E',
-        borderWidth: 0.5,
-        borderColor: 'white',
-        padding: 10,
-        width: '40%',
         marginTop: 10,
         marginBottom: 10,
     },
-    selectDateButtonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontFamily: 'monospace'
-    },
+
     addActivityButton: {
-        // backgroundColor: '#03071F',
-        borderWidth: 1,
-        borderColor: 'white',
-        padding: 10,
-        width: '80%',
         marginTop: 10,
         marginBottom: 10,
     },
-    addActivityButtonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontFamily: 'monospace',
-    },
+
 })

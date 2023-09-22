@@ -18,12 +18,13 @@
     "react": "18.2.0",
     "react-native": "0.71.8",
     "react-native-modal-datetime-picker": "^15.0.1",
+    "react-native-paper": "^5.10.6",
     "react-native-safe-area-context": "4.5.0",
     "react-native-screens": "~3.20.0",
+    "react-native-svg": "13.4.0",
     "react-native-timeline-flatlist": "^0.8.0",
     "react-native-timeline-listview": "^0.2.3",
-    "react-native-uuid": "^2.0.1",
-    "react-native-svg": "13.4.0"
+    "react-native-uuid": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

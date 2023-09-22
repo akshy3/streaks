@@ -1,8 +1,8 @@
-import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import Activity from "../components/Activity";
-import PlusSvg from "../components/PlusSvg";
+import { AnimatedFAB, Chip, Divider, Text } from "react-native-paper";
 
 
 interface activity { id: string, title: string, date: number, history: [] };
@@ -35,47 +35,35 @@ export default function HomeScreen(props: { navigation: any; }) {
 
 
 
-  return (
+  return (<>
 
     <View style={styles.container}>
       <ScrollView>
 
-        <View>{activities.length > 0 ? activities.map((e, index) => (<Activity id={e.id} activities={activities} key={index} navigation={navigation} />)) : <><Text style={styles.emptyInfo}>Add activities to view them here.</Text></>}</View>
+        <View>{activities.length > 0 ? activities.map((e, index) => (<><Activity id={e.id} activities={activities} key={e.id} navigation={navigation} /><Divider /></>)) : <><Chip >Add activities to view them here.</Chip></>}</View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add Activity')}><PlusSvg /></TouchableOpacity>
-
+      <AnimatedFAB
+        icon={'plus'}
+        label={'Create Activity'}
+        style={[styles.addButton]}
+        onPress={() => navigation.navigate('Add Activity')}
+        extended={true}
+      />
     </View>
+  </>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
     flex: 1,
-    flexDirection: 'column',
-    padding: 13,
-    position: 'relative',
+    padding: 10,
   },
-  emptyInfo: {
-    color: 'white',
-    margin: 40,
-  },
+
   addButton: {
-    backgroundColor: 'orange',
-    // borderWidth: 4,
-    // borderColor: 'white',
-    borderRadius: 40,
-    position: 'absolute',
     bottom: 30,
     right: 20,
-    width: 60,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-
-
   },
-  
+
 })

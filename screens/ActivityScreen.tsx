@@ -1,5 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Button, Dialog, Portal, Text } from "react-native-paper";
 import Timeline from 'react-native-timeline-flatlist'
 
 
@@ -9,6 +11,10 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     var activity = activities.find((item: { id: any; }) => item.id == id);
     let date = new Date(activity.date)
     const timelinedata: { time: string; title: string; description: string; circleSize?: number }[] = []
+
+    const [deleteDialogVisible, setDeleteDialogVisible] = React.useState(false);
+    const [relapseDialogVisible, setRelapseDialogVisible] = React.useState(false);
+
 
 
     const DateDiff = (date1: number, date2: number): number => {
@@ -38,14 +44,15 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
     }
     handleHistory(activity.history)
 
-    const handeDelete = async () => {
+    const handleDelete = async () => {
         let data = activities.filter((item: { id: any; }) => item.id !== id)
         data = JSON.stringify(data)
         await AsyncStorage.setItem('@activities', data)
         navigation.navigate('Home')
     }
     const handleRelapse = async () => {
-        if (activity.history[activity.history.length -1]!== Number(new Date().setHours(0,0,0,0))) {
+
+        if (activity.history[activity.history.length - 1] !== Number(new Date().setHours(0, 0, 0, 0))) {
 
             let data = activities.filter((item: { id: any; }) => item.id !== id)
             let newHistory = [...activity.history, Number(new Date().setHours(0, 0, 0, 0))]
@@ -56,66 +63,62 @@ export default function ActivityScreen(props: { route: any; navigation: any; }) 
             navigation.navigate('Home')
         }
 
+
     }
     return (
         <View style={styles.container}>
+            <Portal>
+                <Dialog
+                    visible={deleteDialogVisible}
+                    onDismiss={() => { setDeleteDialogVisible(false) }}>
+                    <Dialog.Title>Confirm Delete</Dialog.Title>
+                    <Dialog.Content>
+                        <Text variant="bodyMedium">Do you want to delete for sure?</Text>
+                    </Dialog.Content>
+                    <Dialog.Actions>
+                        <Button onPress={() => { setDeleteDialogVisible(false) }}>Cancel</Button>
+
+                        <Button onPress={handleDelete}>Delete</Button>
+                    </Dialog.Actions>
+                </Dialog>
+
+                <Dialog
+                    visible={relapseDialogVisible}
+                    onDismiss={() => { setRelapseDialogVisible(false) }}>
+                    <Dialog.Title>Confirm Relapse</Dialog.Title>
+                    <Dialog.Content>
+                        <Text variant="bodyMedium">Do you want to relapse for sure?</Text>
+                    </Dialog.Content>
+                    <Dialog.Actions>
+                        <Button onPress={() => { setRelapseDialogVisible(false) }}>Cancel</Button>
+
+                        <Button onPress={handleRelapse}>Relapse</Button>
+                    </Dialog.Actions>
+                </Dialog>
+            </Portal>
             <Timeline data={timelinedata}
-                style={styles.historyContainer}
-                titleStyle={{ color: 'white' }}
-                circleColor='white'
-                lineColor='white'
-                descriptionStyle={{ color: 'gray',fontFamily: 'monospace' }}
+
             />
-            <TouchableOpacity style={styles.relapseButton} onPress={handleRelapse}><Text style={styles.relapseButtonText}>Relapse</Text></TouchableOpacity> 
-            <TouchableOpacity style={styles.deleteButton} onPress={handeDelete}><Text style={styles.deleteButtonText}>Delete this activity</Text></TouchableOpacity> 
+
+            <Button style={styles.relapseButton} icon="autorenew" mode="contained" onPress={() => { setRelapseDialogVisible(true) }}>Relapse</Button>
+            <Button icon="delete" mode="contained" onPress={() => { setDeleteDialogVisible(true) }}>Delete this activity</Button>
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'black',
         flex: 1,
         padding: 10,
     },
-    text: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 20,
-        fontFamily: 'monospace'
-    },
-    historyContainer: {
-        margin: 20,
-        // backgroundColor: 'black',
-        
-    },
+
+
     relapseButton: {
-        // backgroundColor: '#370617',
-        width: '40%',
+
         marginTop: 10,
         marginBottom: 10,
-        padding: 5,
-        borderWidth: 1,
-        borderColor: 'white',
+    },
 
-    },
-    relapseButtonText: {
-        color: 'white',
-        padding: 5,
-        fontWeight: 'bold',
-        fontFamily: 'monospace'
-    },
-    deleteButton: {
-        // backgroundColor: '#6A040F',
-        padding: 10,
-        borderWidth: 0.5,
-        borderColor: 'white',
-        
 
-    },
-    deleteButtonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontFamily: 'monospace'
-    }
 })
